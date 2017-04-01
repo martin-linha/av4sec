@@ -1,3 +1,7 @@
-To run the app without any configuration, execute 
+# Av4sec
 
-gradlew run --parallel (./gradlew run --parallel on Mac)
+## Installation
+
+Execute the following from root project
+
+`gradlew run --parallel` (`./gradlew run --parallel` on Mac)

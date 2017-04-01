@@ -11,13 +11,13 @@ import java.util.Arrays;
 /**
  * Created by martinlinha on 01.04.17.
  */
-@RestController("/user")
+@RestController("/users")
 public class UserRestService {
 
     @Autowired
     private UserDao userDao;
 
-    @GetMapping
+    @GetMapping("/")
     private Iterable<User> getUsers() {
         return userDao.findAll();
     }

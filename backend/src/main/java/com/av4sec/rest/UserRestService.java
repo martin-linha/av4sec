@@ -17,12 +17,27 @@ import java.util.Arrays;
 @RequestMapping("/users")
 public class UserRestService {
 
+  enum UserOrder {
+    CREATED_ON("createdOn");
+    String order;
+
+    private UserOrder(String order) {
+      this.order = order;
+    }
+  }
+
   @Autowired
   private UserService userService;
 
   @GetMapping
-  private Iterable<User> getUsers() {
-    return userService.findAll();
+  private Iterable<User> getUsers(@RequestParam(required = false) String order) {
+    if (order == null) {
+      return userService.findAll();
+    }
+    if (UserOrder.CREATED_ON.order.equals(order)) {
+      return userService.findAllOrderByCreatedOn();
+    }
+    throw new IllegalArgumentException("Unsupported order " + order);
   }
 
   @PostMapping

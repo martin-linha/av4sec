@@ -20,4 +20,9 @@ public class UserServiceImpl extends CrudServiceImpl<User, String> implements Us
     CrudRepository<User, String> getRepository() {
         return userDao;
     }
+
+  @Override
+  public Iterable<User> findAllOrderByCreatedOn() {
+    return userDao.findAllByOrderByCreatedOnDesc();
+  }
 }

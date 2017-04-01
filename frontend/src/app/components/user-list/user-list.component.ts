@@ -5,7 +5,6 @@ import {UserService} from "../../services/user.service";
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  providers: [UserService],
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
@@ -15,11 +14,13 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
+    this.userService.userCreatedEmitter.subscribe(user =>
+      this.getUsers());
   }
 
   getUsers() {
-    this.userService.getUsers().then(users =>
+    this.userService.getUsersOrderedByCreatedOn().then(users =>
       this.users = users)
   }
 }

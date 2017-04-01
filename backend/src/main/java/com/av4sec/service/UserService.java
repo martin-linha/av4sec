@@ -6,5 +6,8 @@ import org.springframework.stereotype.Service;
 /**
  * Created by martinlinha on 01.04.17.
  */
-public interface UserService extends CrudService<User, String>{
+public interface UserService extends CrudService<User, String> {
+
+  Iterable<User> findAllOrderByCreatedOn();
+
 }

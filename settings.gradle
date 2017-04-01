@@ -1,3 +1,3 @@
 rootProject.name = 'av4sec'
 
-include 'av4sec-backend', 'av4sec-frontend'
+include 'backend', 'frontend'

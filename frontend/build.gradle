@@ -6,7 +6,6 @@ plugins {
 task run {
 
 }
-asdasd
 
 node {
     version = '6.4.0'

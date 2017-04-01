@@ -1,13 +1,13 @@
 buildscript {
-    ext {
-        springBootVersion = '1.4.3.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+  ext {
+    springBootVersion = '1.4.3.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
 }
 
 apply plugin: 'java'
@@ -16,22 +16,24 @@ apply plugin: 'org.springframework.boot'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+  mavenCentral()
+  jcenter()
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    compile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.0'
+  compile 'org.springframework.boot:spring-boot-starter-web'
+  compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+  compile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.0'
+  compile 'org.ajbrown:NameMachine:0.2.0'
 
-    //compile 'org.mindrot:jbcrypt:0.4'
-    //compile 'io.jsonwebtoken:jjwt:0.7.0'
+  //compile 'org.mindrot:jbcrypt:0.4'
+  //compile 'io.jsonwebtoken:jjwt:0.7.0'
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+  testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 springBoot {
-    mainClass = "com.av4sec.MainConfiguration"
+  mainClass = "com.av4sec.MainConfiguration"
 }
 
 task run(dependsOn: bootRun) {}

@@ -1,6 +1,9 @@
 package com.av4sec.service;
 
 import com.av4sec.persistance.document.User;
+import org.ajbrown.namemachine.Name;
+import org.ajbrown.namemachine.NameGenerator;
+import org.ajbrown.namemachine.NameGeneratorOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -16,32 +19,22 @@ import java.util.Arrays;
 @PropertySource("classpath:avasec.properties")
 public class MockDataService {
 
-    @Value("${stage}")
-    private String stage;
+  @Value("${stage}")
+  private String stage;
 
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
 
-    @PostConstruct
-    public void init() {
-        if ("development".equals(stage)) {
-            Arrays.asList(
-                    User.builder()
-                            .firstname("John")
-                            .lastname("Doe")
-                            .email("john@doe.com")
-                            .build(),
-                    User.builder()
-                            .firstname("Stue")
-                            .lastname("Pitt")
-                            .email("stue@pitt.com")
-                            .build(),
-                    User.builder()
-                            .firstname("Pepe")
-                            .lastname("Roni")
-                            .email("pepe@roni.com")
-                            .build()
-            ).forEach(user -> userService.save(user));
-        }
+  @PostConstruct
+  public void init() {
+    if ("development".equals(stage)) {
+      for (int i = 0; i < 40; i++) {
+        Name name = new NameGenerator().generateName();
+        userService.save(User.builder()
+          .email("user" + i + "@testemail.com")
+          .firstname(name.getFirstName())
+          .lastname(name.getLastName()).build());
+      }
     }
+  }
 }
